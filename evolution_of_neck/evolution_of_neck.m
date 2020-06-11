@@ -7,6 +7,7 @@
 addpath('../tifflib/')
 close all;
 clearvars;
+
 %% read background image
 disp('choose the background image');
 [file_name, file_path] = uigetfile('.tif');
@@ -24,7 +25,7 @@ image.height = image.info.Height;
 image.length = length(image.info);
 image.allframe = zeros(image.height,image.width,image.length,'uint16');
 image.info = [];
-% input the necessary information 
+% parameters related to the image series, etc.
 image.center_x = 288;       % location of the center of coalescence defined 
 image.center_y = 370;       % from the original image (use imagej)
 image.delta = 10;           % width from the center in the x direction
@@ -59,7 +60,7 @@ for num = image.start:image.skip:image.length
     current_image = double(image.allframe(:,:,num));
     current_image =image_background./current_image;
     current_image_bw = imbinarize(current_image,image.threshold) ;
-	% get the boundaries
+    % get the boundaries
     B = bwboundaries(current_image_bw,'noholes');
     boundary.ori = B{1};
     B = [];
@@ -73,13 +74,14 @@ for num = image.start:image.skip:image.length
     boundary.temp(boundary.temp(:,2)>(image.center_x+image.delta),:)=[];
     boundary.upper = boundary.temp(boundary.temp(:,1)<image.center_y,:);
     boundary.lower = boundary.temp(boundary.temp(:,1)>image.center_y,:);
-	% plot the neck
+    % plot the neck
     figure(2),plot(boundary.temp(:,1),boundary.temp(:,2),'.')
     boundary.max = max(boundary.upper(:,1));
     boundary.min = min(boundary.lower(:,1));
     neck_length(num) = boundary.min-boundary.max;
 end
-% plot the evolution of neck formation
+
+%% plot the evolution of neck formation
 neck_length = neck_length*image.res;
 time = 0:image.dt:(image.length-1)*image.dt;
 figure(3), plot(time,neck_length,'LineWidth',3,'Color','r');

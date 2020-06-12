@@ -1,2 +1,3 @@
-# image_processing_bubbles
-Image analysis scripts using Matlab to calculate bubble properties
+# README
+Image analysis scripts using Matlab to calculate bubble properties:
+- evolution of neck during coalescence

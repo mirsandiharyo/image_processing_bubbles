@@ -32,7 +32,6 @@ image.delta = 10;           % width from the center in the x direction
 image.res = 1.5984e-2;      % mm/pixel (use imagej)
 image.dt = 0.1;             % ms
 image.start = 1;
-image.skip = 1;
 image.threshold = 2;        % threshold for binarization. 1.5 is usually OK
                             % 0.8 for images from paraview
 
@@ -53,12 +52,11 @@ end
 tifflib('close',file_id);
 
 %% determine the evolution of the neck formation
-neck_length = zeros(1, num);
-for num = image.start:image.skip:image.length
-    fprintf('image num %d\n', num);
+neck_length = zeros(1,image.length);
+for num = image.start:image.length
     % get the current frame and perform binarization
     current_image = double(image.allframe(:,:,num));
-    current_image =image_background./current_image;
+    current_image = image_background./current_image;
     current_image_bw = imbinarize(current_image,image.threshold) ;
     % get the boundaries
     B = bwboundaries(current_image_bw,'noholes');

@@ -1,0 +1,6 @@
+filename = spherical.tif
+time frame (ms) = 0.1
+resolution (mm/pixel) = 0.05602240896
+image start = 1
+image threshold = 0.5
+diameter (mm) = 6

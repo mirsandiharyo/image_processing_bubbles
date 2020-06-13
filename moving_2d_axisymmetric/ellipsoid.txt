@@ -1,0 +1,7 @@
+filename = ellipsoid.tif
+time frame (ms) = 0.8
+resolution (mm/pixel) = 0.0263158
+image start = 1
+image threshold = 0.5
+diameter (mm) = 3.1
+

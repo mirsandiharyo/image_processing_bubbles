@@ -1,0 +1,9 @@
+background image = background.tif
+image series = coalescence.tif
+time frame (ms) = 0.1
+resolution (mm/pixel) = 3.19680e-2
+image start = 1
+image threshold = 2
+center of coalescence in x (pixel) = 144
+center of coalescence in y (pixel) = 185
+width from the center in x (pixel) = 10
